@@ -1,4 +1,4 @@
-"""An OpenSenseMap API Python client."""
+"""An openSenseMap API Python client."""
 import asyncio
 import logging
 import socket
@@ -13,10 +13,10 @@ _INSTANCE = 'https://api.opensensemap.org/boxes/{id}'
 
 
 class OpenSenseMap(object):
-    """A class for handling connections with the OpenSenseMap API."""
+    """A class for handling connections with the openSenseMap API."""
 
     def __init__(self, sensor_id, loop, session):
-        """Initialize the connection the OpenSenseMap API."""
+        """Initialize the connection the openSenseMap API."""
         self._loop = loop
         self._session = session
         self.data = {}
@@ -34,7 +34,7 @@ class OpenSenseMap(object):
             _LOGGER.debug(self.data)
 
         except (asyncio.TimeoutError, aiohttp.ClientError, socket.gaierror):
-            _LOGGER.error("Can not load data from OpenSenseMap API")
+            _LOGGER.error("Can not load data from openSenseMap API")
             raise exceptions.OpenSenseMapConnectionError
 
     @property

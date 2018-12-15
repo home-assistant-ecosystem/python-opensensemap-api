@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Setup file for the OpenSenseMap API Python client."""
+"""Setup file for the openSenseMap API Python client."""
 import os
 import sys
 
@@ -20,7 +20,7 @@ if sys.argv[-1] == 'publish':
 setup(
     name='opensensemap-api',
     version='0.1.0',
-    description='Python client for interacting with the OpenSenseMap API.',
+    description='Python client for interacting with the openSenseMap API.',
     long_description=long_description,
     url='https://github.com/fabaff/python-opensensemap-api',
     download_url='https://github.com/fabaff/python-opensensemap-api/releases',

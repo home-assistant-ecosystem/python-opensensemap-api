@@ -1,8 +1,8 @@
-"""Exceptions for OpenSenseMap API client."""
+"""Exceptions for openSenseMap API client."""
 
 
 class OpenSenseMapError(Exception):
-    """General OpenSenseMap exception occurred."""
+    """General openSenseMap exception occurred."""
 
     pass
 
