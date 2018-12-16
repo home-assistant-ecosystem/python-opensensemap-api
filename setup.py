@@ -19,7 +19,7 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='opensensemap-api',
-    version='0.1.0',
+    version='0.1.1',
     description='Python client for interacting with the openSenseMap API.',
     long_description=long_description,
     url='https://github.com/fabaff/python-opensensemap-api',
