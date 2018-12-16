@@ -18,6 +18,7 @@ async def main():
 
         print("Name:", station.name)
         print("Description:", station.description)
+        print("Coordinates:", station.coordinates)
 
         print("PM 2.5:", station.pm2_5)
         print("PM 10:", station.pm10)
