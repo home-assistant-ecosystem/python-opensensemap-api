@@ -21,6 +21,9 @@ class OpenSenseMap(object):
         self._session = session
         self.data = {}
         self.base_url = _INSTANCE.format(id=sensor_id)
+        self.description = self.name = self.coordinates = None
+        self.pm2_5 = self.pm10 = self.temperature = self.humidity = None
+        self.vcc = None
 
     async def get_data(self):
         """Get details of OpenSenseMap station."""
