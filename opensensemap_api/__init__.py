@@ -65,7 +65,7 @@ class OpenSenseMap(object):
     @property
     def temperature(self):
         """Return the temperature of a station."""
-        return self.get_value('Temperatur')
+        return self.get_value('Temperature')
 
     @property
     def humidity(self):
