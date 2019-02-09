@@ -11,6 +11,17 @@ from . import exceptions
 _LOGGER = logging.getLogger(__name__)
 _INSTANCE = 'https://api.opensensemap.org/boxes/{id}'
 
+_TITLES = {
+    'Humidity': (
+        'rel. Luftfeuchte',
+        'Ilmankosteus', 'Kosteus',  # fi
+    ),
+    'Temperature': (
+        'Temperatur',
+        'Lämpötila',  # fi
+    ),
+}
+
 
 class OpenSenseMap(object):
     """A class for handling connections with the openSenseMap API."""
@@ -65,7 +76,7 @@ class OpenSenseMap(object):
     @property
     def temperature(self):
         """Return the temperature of a station."""
-        return self.get_value('Temperatur')
+        return self.get_value('Temperature')
 
     @property
     def humidity(self):
@@ -79,9 +90,11 @@ class OpenSenseMap(object):
 
     def get_value(self, key):
         """Extract a value for a given key."""
-        try:
-            value = [entry['lastMeasurement']['value'] for entry in
-                     self.data['sensors'] if entry['title'] == key][0]
-            return value
-        except IndexError:
-            return None
+        for title in _TITLES.get(key, ()) + (key,):
+            try:
+                value = [entry['lastMeasurement']['value'] for entry in
+                         self.data['sensors'] if entry['title'] == title][0]
+                return value
+            except IndexError:
+                pass
+        return None
