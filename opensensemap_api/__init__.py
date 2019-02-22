@@ -11,6 +11,29 @@ from . import exceptions
 _LOGGER = logging.getLogger(__name__)
 _INSTANCE = 'https://api.opensensemap.org/boxes/{id}'
 
+_TITLES = {
+    'Air pressure': (
+        'Luftdruck',
+        'Ilmanpaine',  # fi
+    ),
+    'Humidity': (
+        'rel. Luftfeuchte',
+        'Ilmankosteus', 'Kosteus',  # fi
+    ),
+    'Illuminance': (
+        'Beleuchtungsstärke',
+        'Valoisuus', 'Valaistuksen voimakkuus',  # fi
+    ),
+    'Temperature': (
+        'Temperatur',
+        'Lämpötila',  # fi
+    ),
+    'UV': (
+        'UV-Intensität',
+        'UV-säteily',  # fi
+    ),
+}
+
 
 class OpenSenseMap(object):
     """A class for handling connections with the openSenseMap API."""
@@ -77,11 +100,33 @@ class OpenSenseMap(object):
         """Return the current VCC of a station."""
         return self.get_value('VCC')
 
+    @property
+    def air_pressure(self):
+        """Return the current air pressure of a station."""
+        return self.get_value('Air pressure')
+
+    @property
+    def illuminance(self):
+        """Return the current illuminance of a station."""
+        return self.get_value('Illuminance')
+
+    @property
+    def uv(self):
+        """Return the current UV value of a station."""
+        return self.get_value('UV')
+
+    @property
+    def radioactivity(self):
+        """Return the current radioactivity value of a station."""
+        return self.get_value('Radioactivity')
+
     def get_value(self, key):
         """Extract a value for a given key."""
-        try:
-            value = [entry['lastMeasurement']['value'] for entry in
-                     self.data['sensors'] if entry['title'] == key][0]
-            return value
-        except IndexError:
-            return None
+        for title in _TITLES.get(key, ()) + (key,):
+            try:
+                value = [entry['lastMeasurement']['value'] for entry in
+                         self.data['sensors'] if entry['title'] == title][0]
+                return value
+            except IndexError:
+                pass
+        return None
