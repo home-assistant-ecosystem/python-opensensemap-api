@@ -9,29 +9,18 @@ import async_timeout
 from . import exceptions
 
 _LOGGER = logging.getLogger(__name__)
-_INSTANCE = 'https://api.opensensemap.org/boxes/{id}'
+_INSTANCE = "https://api.opensensemap.org/boxes/{id}"
 
 _TITLES = {
-    'Air pressure': (
-        'Luftdruck',
-        'Ilmanpaine',  # fi
+    "Air pressure": ("Luftdruck", "Ilmanpaine",),  # fi
+    "Humidity": ("rel. Luftfeuchte", "Ilmankosteus", "Kosteus",),  # fi
+    "Illuminance": (
+        "Beleuchtungsstärke",
+        "Valoisuus",
+        "Valaistuksen voimakkuus",  # fi
     ),
-    'Humidity': (
-        'rel. Luftfeuchte',
-        'Ilmankosteus', 'Kosteus',  # fi
-    ),
-    'Illuminance': (
-        'Beleuchtungsstärke',
-        'Valoisuus', 'Valaistuksen voimakkuus',  # fi
-    ),
-    'Temperature': (
-        'Temperatur',
-        'Lämpötila',  # fi
-    ),
-    'UV': (
-        'UV-Intensität',
-        'UV-säteily',  # fi
-    ),
+    "Temperature": ("Temperatur", "Lämpötila",),  # fi
+    "UV": ("UV-Intensität", "UV-säteily",),  # fi
 }
 
 
@@ -51,8 +40,7 @@ class OpenSenseMap(object):
             async with async_timeout.timeout(5, loop=self._loop):
                 response = await self._session.get(self.base_url)
 
-            _LOGGER.info(
-                "Response from OpenSenseMap API: %s", response.status)
+            _LOGGER.info("Response from OpenSenseMap API: %s", response.status)
             self.data = await response.json()
             _LOGGER.debug(self.data)
 
@@ -63,69 +51,72 @@ class OpenSenseMap(object):
     @property
     def description(self):
         """Return the description of the station."""
-        return self.data['description']
+        return self.data["description"]
 
     @property
     def name(self):
         """Return the name of the station."""
-        return self.data['name']
+        return self.data["name"]
 
     @property
     def coordinates(self):
         """Return the coordinates of the station."""
-        return self.data['currentLocation']['coordinates']
+        return self.data["currentLocation"]["coordinates"]
 
     @property
     def pm10(self):
         """Return the particulate matter 10 value."""
-        return self.get_value('PM10')
+        return self.get_value("PM10")
 
     @property
     def pm2_5(self):
         """Return the particulate matter 2.5 value."""
-        return self.get_value('PM2.5')
+        return self.get_value("PM2.5")
 
     @property
     def temperature(self):
         """Return the temperature of a station."""
-        return self.get_value('Temperature')
+        return self.get_value("Temperature")
 
     @property
     def humidity(self):
         """Return the humidity of a station."""
-        return self.get_value('Humidity')
+        return self.get_value("Humidity")
 
     @property
     def vcc(self):
         """Return the current VCC of a station."""
-        return self.get_value('VCC')
+        return self.get_value("VCC")
 
     @property
     def air_pressure(self):
         """Return the current air pressure of a station."""
-        return self.get_value('Air pressure')
+        return self.get_value("Air pressure")
 
     @property
     def illuminance(self):
         """Return the current illuminance of a station."""
-        return self.get_value('Illuminance')
+        return self.get_value("Illuminance")
 
     @property
     def uv(self):
         """Return the current UV value of a station."""
-        return self.get_value('UV')
+        return self.get_value("UV")
 
     @property
     def radioactivity(self):
         """Return the current radioactivity value of a station."""
-        return self.get_value('Radioactivity')
+        return self.get_value("Radioactivity")
 
     def get_value(self, key):
         """Extract a value for a given key."""
         for title in _TITLES.get(key, ()) + (key,):
             try:
-                value = [entry['lastMeasurement']['value'] for entry in
-                         self.data['sensors'] if entry['title'] == title][0]
+                value = [
+                    entry["lastMeasurement"]["value"]
+                    for entry in self.data["sensors"]
+                    if entry["title"] == title
+                ][0]
                 return value
             except IndexError:
                 pass
