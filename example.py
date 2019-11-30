@@ -5,7 +5,7 @@ import aiohttp
 
 from opensensemap_api import OpenSenseMap
 
-SENSOR_ID = '5a528c40fa02ec000fe9058a'
+SENSOR_ID = "5a528c40fa02ec000fe9058a"
 
 
 async def main():
