@@ -16,7 +16,7 @@ The module is available from the `Python Package Index <https://pypi.python.org/
 
     $ pip3 install opensensemap-api
 
-On a Fedora-based system.
+On a Fedora-based system or a CentOS7RHEL machine with EPEL.
 
 .. code:: bash
 
