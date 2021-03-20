@@ -12,15 +12,28 @@ _LOGGER = logging.getLogger(__name__)
 _INSTANCE = "https://api.opensensemap.org/boxes/{id}"
 
 _TITLES = {
-    "Air pressure": ("Luftdruck", "Ilmanpaine",),  # fi
-    "Humidity": ("rel. Luftfeuchte", "Ilmankosteus", "Kosteus",),  # fi
+    "Air pressure": (
+        "Luftdruck",
+        "Ilmanpaine",
+    ),  # fi
+    "Humidity": (
+        "rel. Luftfeuchte",
+        "Ilmankosteus",
+        "Kosteus",
+    ),  # fi
     "Illuminance": (
         "Beleuchtungsstärke",
         "Valoisuus",
         "Valaistuksen voimakkuus",  # fi
     ),
-    "Temperature": ("Temperatur", "Lämpötila",),  # fi
-    "UV": ("UV-Intensität", "UV-säteily",),  # fi
+    "Temperature": (
+        "Temperatur",
+        "Lämpötila",
+    ),  # fi
+    "UV": (
+        "UV-Intensität",
+        "UV-säteily",
+    ),  # fi
 }
 
 
