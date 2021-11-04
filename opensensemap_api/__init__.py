@@ -50,7 +50,7 @@ class OpenSenseMap(object):
     async def get_data(self):
         """Get details of OpenSenseMap station."""
         try:
-            async with async_timeout.timeout(5, loop=self._loop):
+            async with async_timeout.timeout(5):
                 response = await self._session.get(self.base_url)
 
             _LOGGER.info("Response from OpenSenseMap API: %s", response.status)
