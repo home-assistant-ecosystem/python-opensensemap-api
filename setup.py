@@ -15,7 +15,7 @@ with open(os.path.join(here, "README.rst"), encoding="utf-8") as readme:
 
 setup(
     name="opensensemap-api",
-    version="0.1.6",
+    version="0.2.0",
     description="Python client for interacting with the openSenseMap API.",
     long_description=long_description,
     url="https://github.com/home-assistant-ecosystem/python-opensensemap-api",
@@ -29,6 +29,7 @@ setup(
     ],
     packages=["opensensemap_api"],
     zip_safe=True,
+    python_requires='>=3.8',
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
@@ -37,8 +38,8 @@ setup(
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Topic :: Utilities",
     ],
 )
