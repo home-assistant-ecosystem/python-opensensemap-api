@@ -40,9 +40,8 @@ _TITLES = {
 class OpenSenseMap(object):
     """A class for handling connections with the openSenseMap API."""
 
-    def __init__(self, sensor_id, loop, session):
+    def __init__(self, sensor_id, session):
         """Initialize the connection the openSenseMap API."""
-        self._loop = loop
         self._session = session
         self.data = {}
         self.base_url = _INSTANCE.format(id=sensor_id)
