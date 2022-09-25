@@ -29,7 +29,7 @@ setup(
     ],
     packages=["opensensemap_api"],
     zip_safe=True,
-    python_requires='>=3.9',
+    python_requires=">=3.9",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
