@@ -29,7 +29,7 @@ setup(
     ],
     packages=["opensensemap_api"],
     zip_safe=True,
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
@@ -38,8 +38,8 @@ setup(
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Utilities",
     ],
 )
