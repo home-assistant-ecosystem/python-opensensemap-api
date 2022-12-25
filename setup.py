@@ -15,7 +15,7 @@ with open(os.path.join(here, "README.rst"), encoding="utf-8") as readme:
 
 setup(
     name="opensensemap-api",
-    version="0.2.0",
+    version="0.3.0",
     description="Python client for interacting with the openSenseMap API.",
     long_description=long_description,
     url="https://github.com/home-assistant-ecosystem/python-opensensemap-api",
