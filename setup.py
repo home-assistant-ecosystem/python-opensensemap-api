@@ -24,8 +24,8 @@ setup(
     author_email="fabian@affolter-engineering.ch",
     license="MIT",
     install_requires=[
-        "aiohttp>=3.7.4,<4",
-        "async_timeout>=4",
+        "aiohttp>=3.8.0,<4",
+        "async_timeout>=4,<5",
     ],
     packages=["opensensemap_api"],
     zip_safe=True,
