@@ -130,6 +130,6 @@ class OpenSenseMap(object):
                     if entry["title"] == title
                 ][0]
                 return value
-            except IndexError:
+            except (IndexError, TypeError):
                 pass
         return None
