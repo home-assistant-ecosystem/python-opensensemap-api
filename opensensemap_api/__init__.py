@@ -63,7 +63,10 @@ class OpenSenseMap(object):
     @property
     def description(self):
         """Return the description of the station."""
-        return self.data["description"]
+        try:
+            return self.data["description"]
+        except KeyError:
+            return None
 
     @property
     def name(self):
