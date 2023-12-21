@@ -12,7 +12,7 @@ _LOGGER = logging.getLogger(__name__)
 _INSTANCE = "https://api.opensensemap.org/boxes/{id}"
 
 _TITLES = {
-    "Air pressure": (
+    "Air Pressure": (
         "Pressure",
         "Luftdruck",
         "Ilmanpaine",
@@ -138,7 +138,7 @@ class OpenSenseMap(object):
     @property
     def air_pressure(self):
         """Return the current air pressure of a station."""
-        return self.get_value("Pressure")
+        return self.get_value("Air Pressure")
 
     @property
     def illuminance(self):
