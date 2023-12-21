@@ -13,27 +13,38 @@ _INSTANCE = "https://api.opensensemap.org/boxes/{id}"
 
 _TITLES = {
     "Air pressure": (
+        "Pressure",
         "Luftdruck",
         "Ilmanpaine",
-    ),  # fi
+    ),
     "Humidity": (
         "rel. Luftfeuchte",
+        "rel. Humidity",
         "Ilmankosteus",
         "Kosteus",
-    ),  # fi
+    ),
     "Illuminance": (
         "Beleuchtungsstärke",
         "Valoisuus",
-        "Valaistuksen voimakkuus",  # fi
+        "Valaistuksen voimakkuus",
+        "Ambient Light",
     ),
     "Temperature": (
         "Temperatur",
         "Lämpötila",
-    ),  # fi
+    ),
     "UV": (
+        "UV Index",
         "UV-Intensität",
         "UV-säteily",
-    ),  # fi
+    ),
+    "Precipitation": (
+        "Rain",
+        "Regen",
+        "Niederschlag",
+    ),
+    "Wind Speed": ("Windgeschwindigkeit",),
+    "Wind Direction": ("Windrichtung",),
 }
 
 
@@ -105,6 +116,11 @@ class OpenSenseMap(object):
         return self.get_value("PM2.5")
 
     @property
+    def pm1_0(self):
+        """Return the particulate matter 1.0 value."""
+        return self.get_value("PM1.0")
+
+    @property
     def temperature(self):
         """Return the temperature of a station."""
         return self.get_value("Temperature")
@@ -139,6 +155,21 @@ class OpenSenseMap(object):
         """Return the current radioactivity value of a station."""
         return self.get_value("Radioactivity")
 
+    @property
+    def wind_speed(self):
+        """Return the current wind speed value of a station."""
+        return self.get_value("Wind Speed")
+
+    @property
+    def wind_direction(self):
+        """Return the current wind direction value of a station."""
+        return self.get_value("Wind Direction")
+
+    @property
+    def precipitation(self):
+        """Return the current precipitation value of a station."""
+        return self.get_value("Precipitation")
+
     def get_value(self, key):
         """Extract a value for a given key."""
         for title in _TITLES.get(key, ()) + (key,):
@@ -146,7 +177,7 @@ class OpenSenseMap(object):
                 value = [
                     entry["lastMeasurement"]["value"]
                     for entry in self.data["sensors"]
-                    if entry["title"] == title
+                    if entry["title"].casefold() == title.casefold()
                     and "lastMeasurement" in entry
                     and "value" in entry["lastMeasurement"]
                 ][0]
