@@ -77,6 +77,22 @@ class OpenSenseMap(object):
     def coordinates(self):
         """Return the coordinates of the station."""
         return self.data["currentLocation"]["coordinates"]
+        
+    @property
+    def exposure(self):
+        """ Return the exposure of the station."""
+        try:
+            return self.data["exposure"]
+        except KeyError:
+            return None
+
+    @property
+    def model(self):
+        """ Return the model of the station."""
+        try:
+            return self.data["model"]
+        except KeyError:
+            return None
 
     @property
     def pm10(self):
@@ -106,7 +122,7 @@ class OpenSenseMap(object):
     @property
     def air_pressure(self):
         """Return the current air pressure of a station."""
-        return self.get_value("Air pressure")
+        return self.get_value("Pressure")
 
     @property
     def illuminance(self):
@@ -130,7 +146,7 @@ class OpenSenseMap(object):
                 value = [
                     entry["lastMeasurement"]["value"]
                     for entry in self.data["sensors"]
-                    if entry["title"] == title
+                    if entry["title"] == title and "lastMeasurement" in entry
                 ][0]
                 return value
             except (IndexError, TypeError):

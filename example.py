@@ -19,11 +19,16 @@ async def main():
         print("Name:", station.name)
         print("Description:", station.description)
         print("Coordinates:", station.coordinates)
+        print("Model:", station.model)
 
         print("PM 2.5:", station.pm2_5)
         print("PM 10:", station.pm10)
 
         print("Temperature:", station.temperature)
+        print("Humidity:", station.humidity)
+        print("Pressure:", station.air_pressure)
+        print("Exposure:", station.exposure)
+
 
 
 if __name__ == "__main__":
