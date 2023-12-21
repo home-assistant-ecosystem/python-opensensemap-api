@@ -77,10 +77,10 @@ class OpenSenseMap(object):
     def coordinates(self):
         """Return the coordinates of the station."""
         return self.data["currentLocation"]["coordinates"]
-        
+
     @property
     def exposure(self):
-        """ Return the exposure of the station."""
+        """Return the exposure of the station."""
         try:
             return self.data["exposure"]
         except KeyError:
@@ -88,7 +88,7 @@ class OpenSenseMap(object):
 
     @property
     def model(self):
-        """ Return the model of the station."""
+        """Return the model of the station."""
         try:
             return self.data["model"]
         except KeyError:
@@ -146,7 +146,9 @@ class OpenSenseMap(object):
                 value = [
                     entry["lastMeasurement"]["value"]
                     for entry in self.data["sensors"]
-                    if entry["title"] == title and "lastMeasurement" in entry
+                    if entry["title"] == title
+                    and "lastMeasurement" in entry
+                    and "value" in entry["lastMeasurement"]
                 ][0]
                 return value
             except (IndexError, TypeError):
