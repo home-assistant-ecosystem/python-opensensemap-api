@@ -12,28 +12,39 @@ _LOGGER = logging.getLogger(__name__)
 _INSTANCE = "https://api.opensensemap.org/boxes/{id}"
 
 _TITLES = {
-    "Air pressure": (
+    "Air Pressure": (
+        "Pressure",
         "Luftdruck",
         "Ilmanpaine",
-    ),  # fi
+    ),
     "Humidity": (
         "rel. Luftfeuchte",
+        "rel. Humidity",
         "Ilmankosteus",
         "Kosteus",
-    ),  # fi
+    ),
     "Illuminance": (
         "Beleuchtungsstärke",
         "Valoisuus",
-        "Valaistuksen voimakkuus",  # fi
+        "Valaistuksen voimakkuus",
+        "Ambient Light",
     ),
     "Temperature": (
         "Temperatur",
         "Lämpötila",
-    ),  # fi
+    ),
     "UV": (
+        "UV Index",
         "UV-Intensität",
         "UV-säteily",
-    ),  # fi
+    ),
+    "Precipitation": (
+        "Rain",
+        "Regen",
+        "Niederschlag",
+    ),
+    "Wind Speed": ("Windgeschwindigkeit",),
+    "Wind Direction": ("Windrichtung",),
 }
 
 
@@ -79,6 +90,22 @@ class OpenSenseMap(object):
         return self.data["currentLocation"]["coordinates"]
 
     @property
+    def exposure(self):
+        """Return the exposure of the station."""
+        try:
+            return self.data["exposure"]
+        except KeyError:
+            return None
+
+    @property
+    def model(self):
+        """Return the model of the station."""
+        try:
+            return self.data["model"]
+        except KeyError:
+            return None
+
+    @property
     def pm10(self):
         """Return the particulate matter 10 value."""
         return self.get_value("PM10")
@@ -87,6 +114,11 @@ class OpenSenseMap(object):
     def pm2_5(self):
         """Return the particulate matter 2.5 value."""
         return self.get_value("PM2.5")
+
+    @property
+    def pm1_0(self):
+        """Return the particulate matter 1.0 value."""
+        return self.get_value("PM1.0")
 
     @property
     def temperature(self):
@@ -106,7 +138,7 @@ class OpenSenseMap(object):
     @property
     def air_pressure(self):
         """Return the current air pressure of a station."""
-        return self.get_value("Air pressure")
+        return self.get_value("Air Pressure")
 
     @property
     def illuminance(self):
@@ -123,6 +155,21 @@ class OpenSenseMap(object):
         """Return the current radioactivity value of a station."""
         return self.get_value("Radioactivity")
 
+    @property
+    def wind_speed(self):
+        """Return the current wind speed value of a station."""
+        return self.get_value("Wind Speed")
+
+    @property
+    def wind_direction(self):
+        """Return the current wind direction value of a station."""
+        return self.get_value("Wind Direction")
+
+    @property
+    def precipitation(self):
+        """Return the current precipitation value of a station."""
+        return self.get_value("Precipitation")
+
     def get_value(self, key):
         """Extract a value for a given key."""
         for title in _TITLES.get(key, ()) + (key,):
@@ -130,7 +177,9 @@ class OpenSenseMap(object):
                 value = [
                     entry["lastMeasurement"]["value"]
                     for entry in self.data["sensors"]
-                    if entry["title"] == title
+                    if entry["title"].casefold() == title.casefold()
+                    and "lastMeasurement" in entry
+                    and "value" in entry["lastMeasurement"]
                 ][0]
                 return value
             except (IndexError, TypeError):
