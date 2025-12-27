@@ -22,7 +22,7 @@ On a Fedora-based system or a CentOS/RHEL machine with EPEL.
 
     $ sudo dnf -y install python3-opensensemap-api
 
-For Nix or NixOS users is a package available. Keep in mind that the lastest releases might only
+For Nix or NixOS users is a package available. Keep in mind that the latest releases might only
 be present in the ``unstable`` channel.
 
 .. code:: bash
