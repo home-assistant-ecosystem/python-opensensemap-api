@@ -8,7 +8,7 @@ version = "0.3.2"
 description = "Python client for interacting with the openSenseMap API."
 readme = "README.rst"
 license = "MIT"
-requires-python = ">=3.9"
+requires-python = ">=3.13"
 authors = [
   { name = "Fabian Affolter", email = "fabian@affolter-engineering.ch" },
 ]
@@ -20,9 +20,8 @@ classifiers = [
   "Operating System :: MacOS :: MacOS X",
   "Operating System :: Microsoft :: Windows",
   "Operating System :: POSIX",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Utilities",
 ]
 dependencies = [
