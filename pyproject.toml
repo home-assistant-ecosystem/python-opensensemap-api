@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "opensensemap-api"
-version = "0.3.2"
+version = "0.4.0"
 description = "Python client for interacting with the openSenseMap API."
 readme = "README.rst"
 license = "MIT"
