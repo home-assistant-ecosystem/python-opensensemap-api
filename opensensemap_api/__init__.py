@@ -4,7 +4,6 @@ import logging
 import socket
 
 import aiohttp
-import async_timeout
 
 from . import exceptions
 
@@ -60,8 +59,8 @@ class OpenSenseMap(object):
     async def get_data(self):
         """Get details of OpenSenseMap station."""
         try:
-            async with async_timeout.timeout(5):
-                response = await self._session.get(self.base_url)
+            timeout = aiohttp.ClientTimeout(total=5)
+            response = await self._session.get(self.base_url, timeout=timeout)
 
             _LOGGER.info("Response from OpenSenseMap API: %s", response.status)
             self.data = await response.json()
