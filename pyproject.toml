@@ -26,7 +26,6 @@ classifiers = [
 ]
 dependencies = [
   "aiohttp>=3.8.5,<4",
-  "async_timeout>=4,<5",
 ]
 
 [project.optional-dependencies]
